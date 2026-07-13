@@ -754,7 +754,18 @@
       var ANGLE_RAD  = ANGLE_DEG * Math.PI / 180;
 
       function updateMobileLine() {
-        if (window.innerWidth > 640) return;
+        if (window.innerWidth > 640) {
+          /* Back on desktop/tablet: clear the inline styles the mobile pass
+             wrote, so the desktop CSS positioning (which lands on the centre
+             black circle) takes over again. */
+          marker.style.left = '';
+          marker.style.top  = '';
+          dotMarker.style.left = '';
+          dotMarker.style.top  = '';
+          mobileLine.style.width = '';
+          mobileLine.style.transform = '';
+          return;
+        }
 
         var vw = window.innerWidth;
         var length = vw * 0.28;                              /* line scales with viewport width */
